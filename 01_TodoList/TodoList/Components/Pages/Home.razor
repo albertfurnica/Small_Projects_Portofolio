@@ -1,0 +1,43 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<PageTitle>TodoList</PageTitle>
+
+    <div class="center-section">
+        <h3 class="title">This is your to-do list!</h3>
+        <div>
+            <ul>
+                @foreach(var _temp in todos)
+                {
+                    <li>
+                        <input type="checkbox" @bind="_temp.IsDone"/>
+                        <input @bind="_temp.Title" />
+                    </li>
+                }
+            </ul>
+        </div>
+        <div>
+            <input @bind="newTitle" @bind:event="oninput" />
+            <button @onclick="AddTodo">Add</button>
+        </div>
+    </div>
+
+@code{
+    private List<Todo> todos = new ();
+    public string newTitle = "";
+    public class Todo
+    {
+        public string Title { get; set; } = string.Empty;
+        public bool IsDone { get; set; }
+    }
+
+    //metoda pentru a adauga un nou obiect de tip Todo in lista
+    private void AddTodo()
+    {
+        if(!string.IsNullOrWhiteSpace(newTitle))
+        {
+            todos.Add(new Todo { Title = newTitle });
+            newTitle = "";
+        }
+    }
+}
