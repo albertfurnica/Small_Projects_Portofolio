@@ -2,23 +2,29 @@
 @rendermode InteractiveServer
 
 <PageTitle>TodoList</PageTitle>
-
     <div class="center-section">
-        <h3 class="title">This is your to-do list!</h3>
+        <!-- function for displaying how many to-dos are unfinished -->
+        <h3 class="title">This is your to-do list! (@todos.Count(t => !t.IsDone))</h3>
         <div>
             <ul>
-                @foreach(var _temp in todos)
+            @if (@todos.Count == 0)
+            {
+                <p class="emptyList-paragraph">Add a to do in your list!</p>
+            }
+            <!-- function for displaying the todos list ordered by IsDone propriety -->
+            @foreach(var _temp in todos.OrderBy(t => t.IsDone))
                 {
-                    <li>
-                        <input type="checkbox" @bind="_temp.IsDone"/>
-                        <input @bind="_temp.Title" />
+                    <li class="list-element">
+                            <input class="todo-checkbox" type="checkbox" @bind="_temp.IsDone"/>
+                            <p style="margin: 0;">@_temp.Title</p>
+                            <button class="deleteTodo-btn" @onclick="() => DeleteTodo(_temp)" >Delete</button>
                     </li>
                 }
             </ul>
         </div>
         <div>
-            <input @bind="newTitle" @bind:event="oninput" />
-            <button @onclick="AddTodo">Add</button>
+            <input class="addTodo-txt" @bind="newTitle" @onkeyup="CheckEnter" placeholder="Add a new to do..."/>
+            <button class="addTodo-btn" @onclick="AddTodo">Add</button>
         </div>
     </div>
 
@@ -30,14 +36,23 @@
         public string Title { get; set; } = string.Empty;
         public bool IsDone { get; set; }
     }
-
-    //metoda pentru a adauga un nou obiect de tip Todo in lista
+    //methode for adding a to-do in list
     private void AddTodo()
     {
         if(!string.IsNullOrWhiteSpace(newTitle))
         {
             todos.Add(new Todo { Title = newTitle });
             newTitle = "";
+        }
+    }
+    //methode for Delete button
+    private void DeleteTodo(Todo temp) => todos.Remove(temp);
+    //methode for validating Enter key when adding a new to-do
+    private void CheckEnter(KeyboardEventArgs args)
+    {
+        if(args.Key == "Enter")
+        {
+            AddTodo();
         }
     }
 }

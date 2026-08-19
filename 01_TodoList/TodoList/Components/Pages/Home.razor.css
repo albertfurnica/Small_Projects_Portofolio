@@ -1,13 +1,88 @@
+div{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.center-section{
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 10px;
+    margin-left: 600px;
+    margin-top: 100px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
 .title{
     flex: 1;
     text-align: center;
     color: rgb(11, 41, 62);
+    margin: 10px;
+    font-weight: 600;
+}
+
+.emptyList-paragraph{
+    color: rgb(11, 41, 62);
+    font-size: 18px;
+    text-align: center;
+}
+
+ul{
+    padding-left: 0;
+}
+
+.list-element{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    background-color: #f4f7f6;
+    border-radius: 4px;
+    overflow: hidden;
+    border-left: 5px solid #5cb85c;
+    padding: 13px 5px;
+}
+
+.todo-checkbox{
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.list-element p{
+    overflow-wrap: break-word;
+    word-break: break-all;
+    justify-content: center;
     margin: 0;
 }
 
-.center-section{
-    background-color: lightblue;
-    position: fixed;
-    top: 50%;
-    left: 50%;
+.deleteTodo-btn{
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    margin-left: auto;
+    margin-right: 5px;
+    padding: 3px 5px;
+}
+
+
+.addTodo-btn{
+    background-color: #5cb85c;
+    border-style: none;
+    border-radius: 3px;
+    padding: 5px 15px;
+    color: white;
+    margin-left: 30px;
+}
+
+.addTodo-btn:hover{
+    background-color: #4cae4c;
+}
+
+.addTodo-txt{
+    width: 245px;
+    border-style: solid;
+    border-color: rgb(164, 164, 164);
+    border-radius: 3px;
+    padding: 5px 15px;
 }
